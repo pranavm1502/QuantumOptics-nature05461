@@ -1,0 +1,117 @@
+\documentclass[12pt,notitlepage,nofootinbib]{revtex4-1}
+%\usepackage[top=0.75in,bottom=0.75in,left=1in,right=1in]{geometry} 
+\usepackage{amsmath,amssymb,esint} 
+\allowdisplaybreaks[0]
+\usepackage[CJKbookmarks]{hyperref}
+\usepackage{bm} 
+\usepackage{siunitx} 
+\usepackage{graphicx} 
+\usepackage{color}
+\usepackage{braket}
+\bibliographystyle{unsrt}
+
+\renewcommand*{\vec}[1]{\bm{#1}} 
+\newcommand{\dif}{\,\mathrm d}
+\newcommand{\rf}{\text{rf}}
+\newcommand\mi{\mathrm{i}}
+\newcommand\e{\mathrm{e}} 
+
+\begin{document}
+\title{Pre-report for ELE456: \\
+``Resolving photon number states in a superconducting circuit''}
+\author{Ming Lyu, Elena de la Hoz Lopez-Collado}
+\maketitle
+This is the pre-report for the course ELE456 about the project on understanding 
+the paper\cite{schuster2007resolving}. 
+
+\section{Understanding the paper}
+\subsection{The system of the experiment}
+The most important result in this paper is the evidence of discreteness of the 
+electromagnetic field energy (photon) on a system of coupled superconducting 
+qubit and wave-guide cavity. The Hamiltonian in the paper is: 
+\begin{equation}\label{eq:diag_jc}
+	H_0 = \hbar\omega_r(a^\dag a + 1/2) + \hbar \omega_a\sigma_z/2 + 
+	\hbar\chi(a^\dag a + 1/2)\sigma_z
+\end{equation}
+Which is actually the diagonalized form of Jaynes-Cummings (JC) model, 
+with $2\chi = 2g_0^2/\Delta$:
+\begin{equation}\label{eq:bare_jc}
+ 	H_{\text{JC}} = \hbar\omega_r(a^\dag a +1/2) + \hbar\omega_a\sigma_z/2 + 
+\hbar g_0(a^\dag\sigma^- + a\sigma^+)
+\end{equation}
+in the large detuning limit ($\Delta = |\omega_r - \omega_a| \gg g_0$), with 
+transformation matrix:
+\begin{equation}\label{eq:diag_matrix}
+	U = \exp \left[\frac {g_0}\Delta(a\sigma^+ - a^\dag\sigma^-)\right]
+\end{equation}
+(Eq.~(12) in \cite{blais2004cavity}, $H_0 = UH_{\text{JC}}U^\dag$). 
+
+The Hamiltonian in Eq.~(\ref{eq:diag_jc}) commutes with ``photon number'' 
+operator $a^\dag a$ and $\sigma_z$ \footnote{Strictly speaking they are not 
+actually photon number and Pauli matrix for the spin, but $U a^\dag a U^\dag$ 
+and $U \sigma_z U^\dag$ in JC model, though the difference is small in the 
+large detuning limit.}. This means that energy eigenstates are also eigenstates 
+of ``photon number'' and spin state. For given ``photon number'' 
+$a^\dag a \ket{n} = n\ket{n}$, the Hamiltonian is reduced to $H = \hbar
+[\omega_a + (2n+1)\chi]\sigma_z/2$. This can can be viewed as a photon-number 
+dependent frequency shift  in the qubit's transition frequency:
+$\Delta \omega =(2n +1)\chi$. Thus, photon number discreteness can be shown from 
+the discreteness of frequency shift.
+
+\subsection{Pumping and readout}
+A more precise description of the system should also include the decay terms 
+(described by the coupling of the qubit and the cavity mode with reservoir 
+modes), which can be calculated from master equations. To make up for the dissipation, 
+a coherent external pumping field is required, described by:
+\begin{equation}\label{eq:pumping}
+	H_{\rf} = \hbar \varepsilon_{\rf}(a^\dag\e^{-\mi\omega_{\rf} t} + 
+	a\e^{\mi\omega_{\rf} t})
+\end{equation}
+This is part of the bare Hamiltonian (should be added to Eq.~(\ref{eq:bare_jc})). 
+In the basis of Eq.~(\ref{eq:diag_jc}) this becomes $U H_\rf U^\dag$, and is 
+actually coupled to both the ``cavity'' and the ``qubit''. However, the 
+frequency $\omega_\rf$ is only near resonance with $\omega_r$, making it 
+effectively coupled to the cavity only. 
+
+To measure the spectrum of the system, a sweeping signal (at the frequency 
+$\omega_s$) is required. This measuring signal behaves just like 
+Eq.~(\ref{eq:pumping}) except for the signal consists of pulses ($\varepsilon_s(t)$): 
+\begin{equation}\label{eq:sweeping}
+	H_{s} = \hbar \varepsilon_{s}(t)(a^\dag\e^{-\mi\omega_{s} t} + 
+	a\e^{\mi\omega_{s} t})
+\end{equation}
+And the sweeping frequency $\omega_s$ range covers the effective ``qubit'' 
+frequencies we are interested in $\omega_a + (2n+1)\chi$. In this way, the 
+spectrum of the system can be readout by observing the reduction of the 
+transmitted sweeping signal due to the coupling of the signal and the system
+(Details are shown in Section~VI in \cite{blais2004cavity}).  
+
+\section{Key results to reproduce}
+We plan to reproduce the numerical result in Fig.~3 (red lines), 
+and try to see if we can reproduce the difference shown in Fig.~4 for thermal 
+and coherent distributions. 
+
+\section{Methods from the class}
+The method we shall use for the project includes: 
+\begin{enumerate}
+	\item The Jaynes-Cummings model to describe the system
+	\item Quantized electromagnetic field to describe the cavity mode
+	\item Semi-classical coupling of electromagnetic field （pumping signal and 
+	sweeping signal) and the system
+	\item Master equation to describe the dissipation and the linewidth 
+\end{enumerate}
+
+\section{Additional concepts}
+To fully understand the experiment system, it is necessary to lean about the 
+Josephson junction and superconducting qubit. 
+\begin{equation}
+	H = 4E_C (n-n_g)^2 - E_J\cos\phi;\qquad \text{with} [n,\phi] = \mi
+\end{equation}
+The difference of this superconducting qubit Hamiltonian and two-level system 
+is discussed in the comments of Fig.~2 in \cite{schuster2007resolving}. 
+
+To understand the transmitted amplitude in the measurement, we probably need 
+to explore the couple-mode theory. 
+
+\bibliography{photonnumber}
+\end{document}
