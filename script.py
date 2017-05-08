@@ -110,29 +110,58 @@ def thermal():
     axs[0].invert_xaxis()
     plt.show()
 
-# def wignar_diff():
+def wignar_diff():
+    wslist = 2 * np.pi * np.linspace(6.75E3, 7.0E3, 500)
+    erf = 0.1
+    # erf=20
+    wrf = np.array([6942])*(2*np.pi)
+    # wrf = np.array([6898.8])*(2*np.pi)
+    no_sw = cavity_state(erf)
+    rhoss_reso = with_sweaping(erf, wrf[0])
+    # draw_sweaping(plt.gca(), wslist, erf)
+    # plt.plot(wrf/(2*np.pi), [expect(a + a.dag(), no_sw-rhoss_reso)], 'r.')
+    # plt.gca().invert_xaxis()
+    # plt.show()
+    xmax=4
+    # xmax=7
+    xvec = np.linspace(-xmax,xmax,200)
+    wswp = wigner((rhoss_reso- no_sw).ptrace(0), xvec, xvec)
+    zmax = 1.8E-9
+    # zmax = 1E-7
+    cs = plt.contourf(xvec, xvec, wswp, 100
+                      ,cmap='seismic', vmin=-zmax, vmax=zmax)
+    # plt.contour(cs, wswp, levels=[0], colors=('k'))
+    plt.colorbar(cs, label=r"$\Delta P$")
+    plt.xlabel(r"$\langle a + a^\dag\rangle$", fontsize=12)
+    plt.ylabel(r"$i \langle a - a^\dag\rangle$", fontsize=12)
+    plt.show()
 
 
 if __name__ == '__main__':
-    # rhoc = cavity_state(30, wrf0).ptrace(0)
+    # erf=30
+    # rhoc = cavity_state(erf, wrf0).ptrace(0)
     # plt.bar(np.arange(0, N), rhoc.diag())
+    # plt.ylabel(r"$\langle n|\rho |n \rangle$", fontsize=12)
+    # plt.xlabel(r"$n$", fontsize=12)
     # plt.show()
 
     # wrflist = wrf0 + np.linspace(-80, 80, 500)
-    # nbarlist = [expect(a.dag()*a, cavity_state(20, wrf)) for wrf in wrflist]
-    # plt.plot(wrflist/(2*np.pi), 20**2/(kappa**2/4 + (delta + wrflist-wrf0)**2)+0.1, '--')
+    # nbarlist = [expect(a.dag()*a, cavity_state(erf, wrf)) for wrf in wrflist]
+    # plt.plot(wrflist/(2*np.pi), erf**2/(kappa**2/4 + (delta + wrflist-wrf0)**2)+0.1, '--')
     # plt.plot(wrflist/(2*np.pi), nbarlist)
     # plt.ylim((-0.3, 13))
-    # plt.arrow(wrf0/(2*np.pi), 4.5, 0, -0.8, ec='r', fc= 'r', head_width=0.4, head_length=0.5)
+    # plt.arrow(wrf0/(2*np.pi), 3.8, 0, 0.8, ec='r', fc= 'r', head_width=0.4, head_length=0.5)
     # plt.xlabel(r"$\omega_{\mathrm{rf}}/(2\pi)$ (MHz)")
     # plt.ylabel(r"$\langle a^\dagger a\rangle$")
     # plt.show()
 
-    wslist = 2 * np.pi * np.linspace(6.75E3, 7.0E3, 500)
-    # draw_sweaping(plt.gca(), wslist, 0.1, obs=a.dag()*a)
+    # wslist = 2 * np.pi * np.linspace(6.75E3, 7.0E3, 500)
+    # draw_sweaping(plt.gca(), wslist, 20, obs=a.dag()*a)
     # # plt.gca().get_yaxis().set_visible(False)
     # plt.gca().invert_xaxis()
     # plt.xlabel(r"$\omega_s/(2\pi)$ (MHz)", fontsize=12)
     # plt.ticklabel_format(style='sci', axis='y', scilimits=(-3,4))
     # plt.ylabel(r"$\bar n_s - \bar n$", fontsize=12)
     # plt.show()
+
+    # wignar_diff()
