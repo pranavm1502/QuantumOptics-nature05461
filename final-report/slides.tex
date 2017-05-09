@@ -1,10 +1,26 @@
 %!TEX program = xelatex
 %!TEX option = --output-driver="xdvipdfmx -V7"
-\documentclass[12pt,hyperref={CJKbookmarks=true}]{beamer}
-\usetheme{CambridgeUS}
-\usecolortheme{dolphin}
-\usefonttheme{professionalfonts}
-\setbeamertemplate{bibliography item}{}
+\documentclass[xcolor=dvipsnames,hyperref={CJKbookmarks=true}]{beamer}
+% \usetheme{CambridgeUS}
+% \usecolortheme{dolphin}
+% \usefonttheme{professionalfonts}
+% \setbeamertemplate{bibliography item}{}
+\usepackage{appendixnumberbeamer}
+\usepackage{tcolorbox}
+\usepackage{xcolor}
+\definecolor{whitesmoke}{rgb}{0.96, 0.96, 0.96}
+\setbeamerfont{page number in head/foot}{size=\large}
+\setbeamertemplate{footline}[frame number]
+\mode<presentation>
+\usetheme{Berkeley}
+
+\setbeamercolor{postit}{bg=ForestGreen}
+\usecolortheme[named=ForestGreen]{structure}
+\useinnertheme{rounded}  
+\usefonttheme[onlymath]{serif}
+
+\beamertemplatenavigationsymbolsempty
+
 \usepackage{lmodern}
 \graphicspath{{figure/}}
 
@@ -15,6 +31,12 @@
 \usepackage{array} 
 \usepackage{multirow} 
 \usepackage{braket}
+
+\usepackage{tikz}
+\usetikzlibrary{quotes,angles}
+\usetikzlibrary{3d,calc}
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{arrows,positioning}
 
 \newcommand{\dif}{\,\mathrm d}
 \newcommand\mi{\mathrm{i}}
@@ -31,6 +53,7 @@
 \author[Ming, Elena]{Ming Lyu, Elena de la Hoz Lopez-Collado}
 \institute[Princeton]{Final projects for ELE456 at Princeton}
 \date{May 11, 2017}
+\logo{\includegraphics[width=1cm]{Princetonshield}}
 \begin{document}
 \begin{frame}
 \titlepage
@@ -40,22 +63,146 @@
 \end{frame}
 
 \section{Introduction} 
-\begin{frame}[t]\frametitle{The paper}
+% \begin{frame}[t]\frametitle{The paper}
     
-This is for paper \cite{schuster2007resolving} % To show bib
+% This is for paper \cite{schuster2007resolving} % To show bib
 
+% \end{frame}
+
+\begin{frame}
+\frametitle{Outline}
+\begin{itemize}
+\item System sensitive to  number of photons
+\vspace{0.3cm}
+\item System: superconducting qubit +  microwave transmission line
+\vspace{0.3cm}
+\item Strong dispersive regime
+\vspace{0.3cm}
+\item Spectroscopic measurements: Qubit's spectral lines different for each photon number state
+\end{itemize}
 \end{frame}
 
 \section{Experiment implementation}
 
 \section{The model}
-\subsection{Diagonal under strong dispersive limit}
-\subsection{Rotating wave approximation}
-\subsection{Dissipation: the collapse operators}
+\subsection{Cavity QED}
+% Say we work with qubits!
+\begin{frame}
+\frametitle{Cavity QED}
+\begin{itemize}
+\item Cavity QED (cQED) $\rightarrow$ interaction electromagnetic field modes with atoms (or qubits)
+\end{itemize}
+\begin{figure}
+\centering
+\includegraphics[width=0.8\linewidth]{cavity.png}
+\end{figure}
+\tiny{\textcolor{gray}{Image from Blais, Alexandre, et al. "Cavity quantum electrodynamics for superconducting electrical circuits: An architecture for quantum computation." Physical Review A 69.6 (2004): 062320.\cite{blais2004cavity}}}
+\end{frame}
+
+\begin{frame}
+\frametitle{Cavity QED: the Hamiltonian}
+\begin{block}{Hamiltonian}
+$$H =  \omega_r \left(a^{\dagger} a+ \dfrac{1}{2} \right) +  \omega_q \dfrac{\sigma^{z}}{2}+  g \left(a^{\dagger}\sigma^{-}+a\sigma^{+}\right)$$
+\end{block}
+\vspace{0.5cm}
+\begin{itemize}
+\item $\omega_r$: cavity resonance frequency
+\vspace{0.3cm}
+\item $\omega_q$: qubit transition frequency
+\vspace{0.3cm}
+\item $g$: strength qubit-photon coupling
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Strong Dispersive Regime}
+\begin{figure}
+\centering
+\includegraphics[width=.9\textwidth]{Regime}
+\end{figure}
+\begin{center}
+\tiny{\textcolor{gray}{Image from Schuster, D. I., et al. "Resolving photon number states in a superconducting circuit." Nature 445.7127 (2007): 515-518.\cite{schuster2007resolving}}}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Strong dispersive Regime: Diagonalization}
+\begin{itemize}
+\item Transformation: 
+$$U=\exp{\left(\dfrac{g}{\Delta}\left(a\sigma^{+}-a^{\dagger}\sigma^{-} \right)\right)}$$
+\item Hamiltonian to first order in $\dfrac{g}{\Delta}$:
+\begin{eqnarray*}
+H_0 &=& U\,H\,U^{\dagger}\\
+&\simeq &  \omega_r \left(a^{\dagger} a+ \dfrac{1}{2} \right) +  \omega_q \dfrac{\sigma^{z}}{2}+ \chi \left(a^{\dagger}a+\dfrac{1}{2} \right)\dfrac{\sigma^{z}}{2}
+\end{eqnarray*}
+where $\chi = \frac{g}{\Delta ^2}$
+\end{itemize}
+\end{frame}
+
+\subsection{Driving terms}
+\begin{frame}
+\frametitle{Driving terms}
+\begin{itemize}
+\item To conduct a measurement we first drive the cavity:
+$$H_{\rf} = \epsilon_{\rf}\left(a^{\dagger}e^{-i\omega_{\rf}t}+ae^{i\omega_{\rf}t} \right)$$
+with $\omega_{\rf}$ near $\omega_r$
+\item The frequency shift of the qubit measured with a sweeping signal
+$$H_{s} = \epsilon_{s}\left(a^{\dagger}e^{-i\omega_{s}t}+ae^{i\omega_{s}t} \right)$$
+\end{itemize}
+with $\omega_{s}$ near $\omega_{q}$
+\end{frame}
+
+\begin{frame}
+\begin{figure}
+\centering
+\includegraphics[width=0.7\linewidth]{TransitionLines}
+\end{figure}
+\tiny{\textcolor{gray}{Image from Schuster, D. I., et al. "Resolving photon number states in a superconducting circuit." Nature 445.7127 (2007): 515-518.\cite{schuster2007resolving}}}
+\end{frame}
+
+\begin{frame}
+\frametitle{Rotating frame and Rotating wave approximation}
+\begin{itemize}
+\item Applying the transformation
+$$U=\exp\left[\dfrac{g}{\Delta}\left(a\sigma^{+}-a^{\dagger}\sigma^{-} \right)\right]$$
+\item And moving to the rotating frame:
+$$U_I=\exp\left[i\left(\omega_{\rf}a^{\dagger}a +\omega_s\sigma^{z}/2 \right)t\right]$$
+\end{itemize}
+$H_{\rf}$ and $H_{s}$ are:
+$$H_{\rf} = \epsilon_{\rf}\left(a^{\dagger}+a\right)$$
+$$H_{s} = \left(\frac{g}{\Delta}\right)\epsilon_{s}\left(\sigma^{+}+\sigma^{-} \right)$$
+\end{frame}
+
+\begin{frame}
+\frametitle{Final Hamiltonian and collapse operators}
+\begin{itemize}
+	\item Full Hamiltonian: 
+\begin{align*}
+H =& \omega_r \left(a^{\dagger} a+ \dfrac{1}{2} \right) +  \omega_q \dfrac{\sigma^{z}}{2}+ \chi \left(a^{\dagger}a+\dfrac{1}{2} \right)\dfrac{\sigma^{z}}{2}\\
+& - \left( \omega_{\rf}a^{\dagger}a +\omega_s \dfrac{\sigma^{z}}{2} \right) + \epsilon_{\rf}\left(a^{\dagger}+a\right) 
++  \epsilon_{s}\dfrac{g}{\Delta}\left(\sigma^{+}+\sigma^{-} \right)
+\end{align*}
+	\item Collapse operator: 
+	\begin{itemize}
+		\item  Collapse operators cavity: 
+		$\sqrt{\kappa \left(1+n_{th} \right)}a$, 
+		$\sqrt{\kappa \left(n_{th} \right)}a^{\dagger}$
+		\item Collapse operator qubit:  
+		$\sqrt{\gamma}\sigma^{-}$
+		\item Dephasing: 
+		$\sqrt{\gamma_{\phi}}\sigma^{z}$
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+% \subsection{Diagonal under strong dispersive limit}
+% \subsection{Rotating wave approximation}
+% \subsection{Dissipation: the collapse operators}
 \subsection{Measurement}
 \begin{frame}[t]\frametitle{Measurement}
 In the experiment, the transmitted amplitude at frequency $\omega_{\rf}$ is the main observable. The exact way to measure it is not mentioned in this paper, 
-but can be check in Schuster's thesis: \cite{schuster2007circuit}. 
+but can be check in Schuster's thesis \cite{schuster2007circuit}: 
 \begin{center}
   \includegraphics[width=0.6\textwidth]{measurement.png}
 \end{center}
@@ -179,7 +326,7 @@ but can be check in Schuster's thesis: \cite{schuster2007circuit}.
 \begin{itemize}
 	\item The peaks shows discreteness in the photon state in the cavity. 
 	\item Exciting the qubit making the cavity off-resonance, which results in
-	the reduction? \pause \textbf{NOT TRUE} \pause
+	the reduction? \pause \textbf{\color{red} NOT TRUE} \pause
 	\item Expected photon number increases at the peaks!
 \begin{columns}
 \begin{column}{0.5\linewidth}
@@ -226,6 +373,51 @@ but can be check in Schuster's thesis: \cite{schuster2007circuit}.
 % \centering
 % \Large
 % The End...\\ Thank you for listening! \\ Q \& A
-% \end{frame}
+% \end{frame}\appendix
+
+\section{Circuit cQED}
+
+\begin{frame}
+\frametitle{Circuit Cavity QED}
+
+\only<1>{
+\begin{columns}
+\column{0.5\linewidth}
+\centering
+\begin{beamercolorbox}[wd={3cm}, ht={0.3cm},center, rounded=true,shadow=false]{postit}
+\textcolor{White}{Cavity}
+\end{beamercolorbox}
+\vspace{0.5cm}
+\begin{itemize}
+\item 1D transmission line resonator 
+\vspace{0.3cm}
+\item Full-wave section of superconducting coplanar waveguides
+\end{itemize}
+\vspace{0.3cm}
+\column{0.5\linewidth}
+\centering
+\begin{beamercolorbox}[wd={3cm}, ht={0.3cm},center, rounded=true,shadow=false]{postit}
+\textcolor{White}{Qubit}
+\end{beamercolorbox}
+\vspace{0.5cm}
+\begin{itemize}
+\item Cooper pair box
+\vspace{0.3cm}
+\item Superconducting mesoscopic island connected via a Josephson Junction to a reservoir
+\end{itemize}
+\end{columns}
+}
+\only<2>{
+\begin{figure}
+\includegraphics[width=0.8\linewidth]{Circuit}
+\caption{Cooper pair box inside a cavity, and spectral features of the
+circuit QED system.}
+\end{figure}
+\begin{center}
+\tiny{\textcolor{gray}{Image from Schuster, D. I., et al. "Resolving photon number states in a superconducting circuit." Nature 445.7127 (2007): 515-518.}}
+\end{center}}
+\end{frame}
+
+
 
 \end{document}
