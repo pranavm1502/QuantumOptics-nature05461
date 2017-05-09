@@ -13,9 +13,10 @@
 \setbeamertemplate{footline}[frame number]
 \mode<presentation>
 \usetheme{Berkeley}
+\renewcommand\appendixname{Appendix}
 
-\setbeamercolor{postit}{bg=ForestGreen}
-\usecolortheme[named=ForestGreen]{structure}
+\setbeamercolor{postit}{bg=MidnightBlue}
+\usecolortheme[named=MidnightBlue]{structure}
 \useinnertheme{rounded}  
 \usefonttheme[onlymath]{serif}
 
@@ -44,10 +45,12 @@
 \newcommand{\rf}{\text{rf}}
 \newcommand{\thm}{\text{th}}
 \DeclareMathOperator{\Hc}{H.c.}
+\DeclareMathOperator{\Tr}{Tr}
 
 % \usepackage[style=authoryear-comp,sorting=none]{biblatex}
 % \bibliography{photonnumber}
-\bibliographystyle{unsrt}
+\bibliographystyle{plain}
+\setbeamertemplate{bibliography item}[triangle]
 
 \title[Nature 445, 515-518]{Resolving photon number states in a superconducting circuit}
 \author[Ming, Elena]{Ming Lyu, Elena de la Hoz Lopez-Collado}
@@ -94,6 +97,18 @@
 \end{itemize}
 \begin{figure}
 \centering
+\includegraphics[width=0.8\linewidth]{cQED-atom.pdf}
+\end{figure}
+\tiny{\textcolor{gray}{Image from Blais, Alexandre, et al. "Cavity quantum electrodynamics for superconducting electrical circuits: An architecture for quantum computation." Physical Review A 69.6 (2004): 062320.\cite{blais2004cavity}}}
+\end{frame}
+
+\begin{frame}
+\frametitle{Cavity QED: Superconducting qubit}
+\begin{itemize}
+\item Cavity QED (cQED) $\rightarrow$ interaction electromagnetic field modes with superconducting qubit
+\end{itemize}
+\begin{figure}
+\centering
 \includegraphics[width=0.8\linewidth]{cavity.png}
 \end{figure}
 \tiny{\textcolor{gray}{Image from Blais, Alexandre, et al. "Cavity quantum electrodynamics for superconducting electrical circuits: An architecture for quantum computation." Physical Review A 69.6 (2004): 062320.\cite{blais2004cavity}}}
@@ -102,15 +117,17 @@
 \begin{frame}
 \frametitle{Cavity QED: the Hamiltonian}
 \begin{block}{Hamiltonian}
-$$H =  \omega_r \left(a^{\dagger} a+ \dfrac{1}{2} \right) +  \omega_q \dfrac{\sigma^{z}}{2}+  g \left(a^{\dagger}\sigma^{-}+a\sigma^{+}\right)$$
+$$H =  \omega_r \left(a^{\dagger} a+ \dfrac{1}{2} \right) +  \omega_a \dfrac{\sigma^{z}}{2}+  g \left(a^{\dagger}\sigma^{-}+a\sigma^{+}\right)$$
 \end{block}
 \vspace{0.5cm}
 \begin{itemize}
 \item $\omega_r$: cavity resonance frequency
 \vspace{0.3cm}
-\item $\omega_q$: qubit transition frequency
+\item $\omega_a$: qubit transition frequency
 \vspace{0.3cm}
 \item $g$: strength qubit-photon coupling
+\vspace{0.3cm}
+\item $\Delta = \omega_r - \omega_a$: detuning between qubit and cavity
 \end{itemize}
 \end{frame}
 
@@ -130,16 +147,24 @@ $$H =  \omega_r \left(a^{\dagger} a+ \dfrac{1}{2} \right) +  \omega_q \dfrac{\si
 \begin{itemize}
 \item Transformation: 
 $$U=\exp{\left(\dfrac{g}{\Delta}\left(a\sigma^{+}-a^{\dagger}\sigma^{-} \right)\right)}$$
-\item Hamiltonian to first order in $\dfrac{g}{\Delta}$:
+\item Hamiltonian to first order in $\dfrac{g}{\Delta}$ (dispersive regime):
 \begin{eqnarray*}
 H_0 &=& U\,H\,U^{\dagger}\\
-&\simeq &  \omega_r \left(a^{\dagger} a+ \dfrac{1}{2} \right) +  \omega_q \dfrac{\sigma^{z}}{2}+ \chi \left(a^{\dagger}a+\dfrac{1}{2} \right)\dfrac{\sigma^{z}}{2}
+&\simeq &  \omega_r \left(a^{\dagger} a+ \dfrac{1}{2} \right) +  \omega_a \dfrac{\sigma^{z}}{2}+ \chi \left(a^{\dagger}a+\dfrac{1}{2} \right)\dfrac{\sigma^{z}}{2}
 \end{eqnarray*}
 where $\chi = g/\Delta ^2$
 \end{itemize}
 \end{frame}
 
 \subsection{Driving terms}
+\begin{frame}
+\begin{figure}
+\centering
+\includegraphics[width=0.7\linewidth]{TransitionLines}
+\end{figure}
+\tiny{\textcolor{gray}{Image from Schuster, D. I., et al. "Resolving photon number states in a superconducting circuit." Nature 445.7127 (2007): 515-518.\cite{schuster2007resolving}}}
+\end{frame}
+
 \begin{frame}
 \frametitle{Driving terms}
 \begin{itemize}
@@ -148,18 +173,10 @@ $$H_{\rf} = \epsilon_{\rf}\left(a^{\dagger}e^{-i\omega_{\rf}t}+ae^{i\omega_{\rf}
 with $\omega_{\rf}$ near $\omega_r$
 \item The frequency shift of the qubit measured with a sweeping signal
 $$H_{s} = \epsilon_{s}\left(a^{\dagger}e^{-i\omega_{s}t}+ae^{i\omega_{s}t} \right)$$
-with $\omega_{s}$ near $\omega_{q}$
+with $\omega_{s}$ near $\omega_a$
 \item Note that relative strength of $\epsilon_s$ is not mentioned. We treat it 
 as a perturbation. 
 \end{itemize}
-\end{frame}
-
-\begin{frame}
-\begin{figure}
-\centering
-\includegraphics[width=0.7\linewidth]{TransitionLines}
-\end{figure}
-\tiny{\textcolor{gray}{Image from Schuster, D. I., et al. "Resolving photon number states in a superconducting circuit." Nature 445.7127 (2007): 515-518.\cite{schuster2007resolving}}}
 \end{frame}
 
 \begin{frame}
@@ -170,9 +187,11 @@ $$U=\exp\left[\dfrac{g}{\Delta}\left(a\sigma^{+}-a^{\dagger}\sigma^{-} \right)\r
 \item And moving to the rotating frame:
 $$U_I=\exp\left[i\left(\omega_{\rf}a^{\dagger}a +\omega_s\sigma^{z}/2 \right)t\right]$$
 \end{itemize}
-$H_{\rf}$ and $H_{s}$ are:
-$$H_{\rf} = \epsilon_{\rf}\left(a^{\dagger}+a\right)$$
-$$H_{s} = \left(\frac{g}{\Delta}\right)\epsilon_{s}\left(\sigma^{+}+\sigma^{-} \right)$$
+Under rotating frame, $H_{\rf}$ and $H_{s}$ are (with RWA):
+\begin{align*}
+	&H_{\rf} = \epsilon_{\rf}\left(a^{\dagger}+a\right) \\
+	&H_{s} = \left(\frac{g}{\Delta}\right)\epsilon_{s}\left(\sigma^{+}+\sigma^{-} \right)
+\end{align*}
 \end{frame}
 
 \begin{frame}
@@ -180,7 +199,7 @@ $$H_{s} = \left(\frac{g}{\Delta}\right)\epsilon_{s}\left(\sigma^{+}+\sigma^{-} \
 \begin{itemize}
 	\item Full Hamiltonian: 
 \begin{align*}
-H =& \omega_r \left(a^{\dagger} a+ \dfrac{1}{2} \right) +  \omega_q \dfrac{\sigma^{z}}{2}+ \chi \left(a^{\dagger}a+\dfrac{1}{2} \right)\dfrac{\sigma^{z}}{2}\\
+H =& \omega_r \left(a^{\dagger} a+ \dfrac{1}{2} \right) +  \omega_a \dfrac{\sigma^{z}}{2}+ \chi \left(a^{\dagger}a+\dfrac{1}{2} \right)\dfrac{\sigma^{z}}{2}\\
 & - \left( \omega_{\rf}a^{\dagger}a +\omega_s \dfrac{\sigma^{z}}{2} \right) + \epsilon_{\rf}\left(a^{\dagger}+a\right) 
 +  \epsilon_{s}\dfrac{g}{\Delta}\left(\sigma^{+}+\sigma^{-} \right)
 \end{align*}
@@ -188,7 +207,7 @@ H =& \omega_r \left(a^{\dagger} a+ \dfrac{1}{2} \right) +  \omega_q \dfrac{\sigm
 	\begin{itemize}
 		\item  Collapse operators cavity: 
 		$\sqrt{\kappa \left(1+n_{\thm} \right)}a$, 
-		$\sqrt{\kappa \left(n_{\thm} \right)}a^{\dagger}$
+		$\sqrt{\kappa n_{\thm} }a^{\dagger}$
 		\item Collapse operator qubit:  
 		$\sqrt{\gamma}\sigma^{-}$
 		\item Dephasing: 
@@ -202,16 +221,22 @@ H =& \omega_r \left(a^{\dagger} a+ \dfrac{1}{2} \right) +  \omega_q \dfrac{\sigm
 % \subsection{Dissipation: the collapse operators}
 \subsection{Measurement}
 \begin{frame}[t]\frametitle{Measurement}
-In the experiment, the transmitted amplitude at frequency $\omega_{\rf}$ is the 
-main observable. The exact way to measure can be found in Schuster's thesis \cite{schuster2007circuit}: 
-\begin{center}
-  \includegraphics[width=0.7\textwidth]{measurement.png}
-\end{center}
 	\begin{itemize}
-		\item What we really measure is the expectation of the voltage, or 
-		electrical field $E\propto\langle a + a^\dag \rangle$
-	\end{itemize}
+		\item In the experiment, the transmitted amplitude at frequency $\omega_{\rf}$ is the main observable under steady state. 
+	\begin{block}{Steady state}
+	$$
+	\dot\rho_s = 0 = -i[H, \rho_{s}] + \sum_n \left(2C_n \rho_s C_n^\dag - 
+	\{\rho_s, C_n^\dag C_n\}\right)
+	$$
+	\end{block}
+	~
 
+		\item What they really measure is the expectation of the 
+		electrical field $E\propto\langle a + a^\dag \rangle$ \cite{schuster2007circuit} on a given frequency
+	$$
+	E\propto \langle a + a^\dag \rangle = \Tr [\rho_{s}(a+a^\dag)]
+	$$
+	\end{itemize}
 \end{frame}
 
 \section{Numerical simulation}
@@ -371,19 +396,34 @@ We'll explain it later.
 \end{columns}
 \end{frame}
 
-\begin{frame}[allowframebreaks]
+\section{Conclusion}
+\begin{frame}[t]\frametitle{Conclusion}
+    
+TBD
+
+\end{frame}
+
+\begin{frame}%[allowframebreaks]
     \frametitle{Reference}
+	\small
     % \printbibliography[heading=none]
     \bibliography{photonnumber}
 \end{frame}
 
-% \begin{frame}
-% \centering
-% \Large
-% The End...\\ Thank you for listening! \\ Q \& A
-% \end{frame}\appendix
+\begin{frame}\frametitle{The End...}
+\centering
+\Large
+Thank you for listening! 
+~\\
+~\\
 
-\section{Circuit cQED}
+\includegraphics[width=\linewidth]{miracle-occurs2.jpg}
+
+Q \& A
+\end{frame}
+
+\appendix
+% \section*{Circuit cQED}
 
 \begin{frame}
 \frametitle{Circuit Cavity QED}
@@ -426,6 +466,17 @@ circuit QED system.}
 \end{center}}
 \end{frame}
 
+\begin{frame}[t]\frametitle{Measurement}
+In the experiment, the transmitted amplitude at frequency $\omega_{\rf}$ is the 
+main observable. The exact way to measure can be found in Schuster's thesis \cite{schuster2007circuit}: 
+\begin{center}
+  \includegraphics[width=0.7\textwidth]{measurement.png}
+\end{center}
+	\begin{itemize}
+		\item What we really measure is the expectation of the voltage, or 
+		electrical field $E\propto\langle a + a^\dag \rangle$
+	\end{itemize}
+\end{frame}
 
 
 \end{document}
