@@ -82,7 +82,7 @@
 \end{itemize}
 \end{frame}
 
-% \section{Experiment implementation}
+% \section{Experiment implementdeation}
 
 \section{The model}
 \subsection{Cavity QED}
@@ -121,9 +121,8 @@ $$H =  \omega_r \left(a^{\dagger} a+ \dfrac{1}{2} \right) +  \omega_q \dfrac{\si
 \centering
 \includegraphics[width=.9\textwidth]{Regime}
 \end{figure}
-\begin{center}
+
 \tiny{\textcolor{gray}{Image from Schuster, D. I., et al. "Resolving photon number states in a superconducting circuit." Nature 445.7127 (2007): 515-518.\cite{schuster2007resolving}}}
-\end{center}
 \end{frame}
 
 \begin{frame}
@@ -136,7 +135,7 @@ $$U=\exp{\left(\dfrac{g}{\Delta}\left(a\sigma^{+}-a^{\dagger}\sigma^{-} \right)\
 H_0 &=& U\,H\,U^{\dagger}\\
 &\simeq &  \omega_r \left(a^{\dagger} a+ \dfrac{1}{2} \right) +  \omega_q \dfrac{\sigma^{z}}{2}+ \chi \left(a^{\dagger}a+\dfrac{1}{2} \right)\dfrac{\sigma^{z}}{2}
 \end{eqnarray*}
-where $\chi = \frac{g}{\Delta ^2}$
+where $\chi = g/\Delta ^2$
 \end{itemize}
 \end{frame}
 
@@ -149,8 +148,10 @@ $$H_{\rf} = \epsilon_{\rf}\left(a^{\dagger}e^{-i\omega_{\rf}t}+ae^{i\omega_{\rf}
 with $\omega_{\rf}$ near $\omega_r$
 \item The frequency shift of the qubit measured with a sweeping signal
 $$H_{s} = \epsilon_{s}\left(a^{\dagger}e^{-i\omega_{s}t}+ae^{i\omega_{s}t} \right)$$
-\end{itemize}
 with $\omega_{s}$ near $\omega_{q}$
+\item Note that relative strength of $\epsilon_s$ is not mentioned. We treat it 
+as a perturbation. 
+\end{itemize}
 \end{frame}
 
 \begin{frame}
@@ -201,10 +202,10 @@ H =& \omega_r \left(a^{\dagger} a+ \dfrac{1}{2} \right) +  \omega_q \dfrac{\sigm
 % \subsection{Dissipation: the collapse operators}
 \subsection{Measurement}
 \begin{frame}[t]\frametitle{Measurement}
-In the experiment, the transmitted amplitude at frequency $\omega_{\rf}$ is the main observable. The exact way to measure it is not mentioned in this paper, 
-but can be check in Schuster's thesis \cite{schuster2007circuit}: 
+In the experiment, the transmitted amplitude at frequency $\omega_{\rf}$ is the 
+main observable. The exact way to measure can be found in Schuster's thesis \cite{schuster2007circuit}: 
 \begin{center}
-  \includegraphics[width=0.6\textwidth]{measurement.png}
+  \includegraphics[width=0.7\textwidth]{measurement.png}
 \end{center}
 	\begin{itemize}
 		\item What we really measure is the expectation of the voltage, or 
@@ -253,13 +254,17 @@ but can be check in Schuster's thesis \cite{schuster2007circuit}:
 \begin{frame}[t]\frametitle{Direct spectroscopic observation of quantized cavity photon number}
 \begin{columns}
 \begin{column}{0.4\linewidth}
-\begin{itemize}
-	\item For a fixed driving $\epsilon_{\rf}$, plot the reduction
+% \begin{itemize}
+	For a fixed driving $\epsilon_{\rf}$, plot the reduction
 	$V_0 - \langle a^\dag + a\rangle_{ss}$ v.s. $\omega_{s}$. 
+
+~
+
+	$\epsilon_{\rf}$ is labeled by $\bar n$ with relationship:
 	\begin{equation*}
 		\bar n = n_{\thm} + \frac{\epsilon_{\rf}^2}{\delta^2 + \kappa^2/4}
 	\end{equation*}
-\end{itemize}
+% \end{itemize}
 \end{column}%
 \begin{column}{0.6\linewidth}
 	\centering
@@ -268,7 +273,7 @@ but can be check in Schuster's thesis \cite{schuster2007circuit}:
 \end{columns}
 \end{frame}
 
-\begin{frame}[t]
+\begin{frame}[t]\frametitle{Direct spectroscopic observation of quantized cavity photon number: compare}
 \begin{columns}
 \begin{column}{0.35\linewidth}
     \centering
@@ -281,28 +286,31 @@ but can be check in Schuster's thesis \cite{schuster2007circuit}:
 \end{column}
 \end{columns}
 \begin{itemize}
-	\item The way $\bar n$ is defined is larger than ours. 
+	% \item The way $\bar n$ is defined is larger than ours. 
+	\item Fits well with small $\bar n$, but other noise becomes significant 
+	for larger $\bar n$
 \end{itemize}
 \end{frame}
 
+\begin{frame}[t]\frametitle{Strengthen? }
+\begin{center}
+	\includegraphics[width=0.7\linewidth]{figure/erf=0.1.png}
+\end{center}
+For small signal, there's a range where the transmitted amplitude is increased. 
+We'll explain it later. 
+\end{frame}
+
 \begin{frame}[t]\frametitle{Thermal Drive}
-    
-\begin{columns}
-\begin{column}{0.4\linewidth}
 \begin{itemize}
 	\item Thermal Drive is equivalent to setting $n_{\thm}$ in collapse operator
 	to the driving average, with small $\epsilon_{\rf}$ to show the phase 
 	lock-in at the given frequency. 
 \end{itemize}
-\end{column}%
-\begin{column}{0.6\linewidth}
 	\centering
-    \includegraphics[width=\textwidth]{thermal.png}
-\end{column}
-\end{columns}
+    \includegraphics[width=0.7\textwidth]{thermal.png}
 \end{frame}
 
-\begin{frame}[t]
+\begin{frame}[t]\frametitle{Thermal Drive: compare}
 \begin{columns}
 \begin{column}{0.4\linewidth}
     \centering
