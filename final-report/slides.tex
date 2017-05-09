@@ -169,10 +169,16 @@ where $\chi = g/\Delta ^2$
 \frametitle{Driving terms}
 \begin{itemize}
 \item To conduct a measurement we first drive the cavity:
-$$H_{\rf} = \epsilon_{\rf}\left(a^{\dagger}e^{-i\omega_{\rf}t}+ae^{i\omega_{\rf}t} \right)$$
+    $$
+      H_{\rf} = \epsilon_{\rf}\left(a^{\dagger}\e^{-\mi\omega_{\rf}t}
+      +a\e^{\mi\omega_{\rf}t} \right)
+    $$
 with $\omega_{\rf}$ near $\omega_r$
 \item The frequency shift of the qubit measured with a sweeping signal
-$$H_{s} = \epsilon_{s}\left(a^{\dagger}e^{-i\omega_{s}t}+ae^{i\omega_{s}t} \right)$$
+    $$
+      H_{s} = \epsilon_{s}\left(a^{\dagger}\e^{-\mi\omega_{s}t}
+      +a\e^{\mi\omega_{s}t} \right)
+    $$
 with $\omega_{s}$ near $\omega_a$
 \item Note that relative strength of $\epsilon_s$ is not mentioned. We treat it 
 as a perturbation. 
@@ -185,7 +191,8 @@ as a perturbation.
 \item Applying the transformation
 $$U=\exp\left[\dfrac{g}{\Delta}\left(a\sigma^{+}-a^{\dagger}\sigma^{-} \right)\right]$$
 \item And moving to the rotating frame:
-$$U_I=\exp\left[i\left(\omega_{\rf}a^{\dagger}a +\omega_s\sigma^{z}/2 \right)t\right]$$
+$$U_I=\exp\left[\mi t\left(
+\omega_{\rf}a^{\dagger}a +\omega_s\sigma^{z}/2 \right)\right]$$
 \end{itemize}
 Under rotating frame, $H_{\rf}$ and $H_{s}$ are (with RWA):
 \begin{align*}
@@ -225,7 +232,7 @@ H =& \omega_r \left(a^{\dagger} a+ \dfrac{1}{2} \right) +  \omega_a \dfrac{\sigm
 		\item In the experiment, the transmitted amplitude at frequency $\omega_{\rf}$ is the main observable under steady state. 
 	\begin{block}{Steady state}
 	$$
-	\dot\rho_s = 0 = -i[H, \rho_{s}] + \sum_n \left(2C_n \rho_s C_n^\dag - 
+	\dot\rho_s = 0 = -\mi[H, \rho_{s}] + \sum_n \left(2C_n \rho_s C_n^\dag - 
 	\{\rho_s, C_n^\dag C_n\}\right)
 	$$
 	\end{block}
@@ -466,6 +473,36 @@ circuit QED system.}
 \end{center}}
 \end{frame}
 
+\begin{frame}[t]\frametitle{Josephson junction and superconducting circuit}
+% \begin{itemize}
+	% \item Josephson junction $I = I_c\sin\phi$ with 
+% \end{itemize}
+\begin{columns}
+	\begin{column}{0.75\linewidth}
+	\begin{itemize}
+		\item The Hamiltonian
+		$$
+			H = E_c (N-N_g)^2 - E_J\cos\delta
+		$$
+		\item Commutation relationship: $[\delta, N] = \mi$, this means 
+		$\e^{\pm\mi\delta}\ket{n} = \ket{n\pm 1}$
+	\end{itemize}
+	\end{column}%
+	\begin{column}{0.25\linewidth}
+	\includegraphics[width=\linewidth]{copper_pair_box.pdf}
+	\end{column}
+\end{columns}
+\begin{itemize}
+	\item Approximately two-level system: $0\le N_g \le 1$, $N = 0, 1$: 
+	$$
+	H = -E_c(1-2N_g) \sigma^z - \frac 12 E_J\sigma^x
+	$$
+	\item With coupling, $N_g \longrightarrow N_g + CV_0 (a + a^\dag)/2e$
+	\item Choose eigen basis at degeneracy point ($N_g = 1/2$), we can have JC 
+	model up to some constants. 
+\end{itemize}
+\end{frame}
+
 \begin{frame}[t]\frametitle{Measurement}
 In the experiment, the transmitted amplitude at frequency $\omega_{\rf}$ is the 
 main observable. The exact way to measure can be found in Schuster's thesis \cite{schuster2007circuit}: 
@@ -476,6 +513,46 @@ main observable. The exact way to measure can be found in Schuster's thesis \cit
 		\item What we really measure is the expectation of the voltage, or 
 		electrical field $E\propto\langle a + a^\dag \rangle$
 	\end{itemize}
+\end{frame}
+
+\begin{frame}[t]\frametitle{Wigner function (Wigner quasiprobability distribution)}
+\begin{itemize}
+	\item Wigner function is an analogue of classical probability distribution 
+	on phase space
+	\begin{block}{Definition: Wigner function}
+	\begin{align*}
+		P(x, p) &\equiv \frac{1}{(2\pi\hbar)^n}\int\dif^n y \,
+		    \psi(x-y/2)\psi^*(x+y/2) \e^{\mi p\cdot y/\hbar} \\
+		&= \frac{1}{(2\pi\hbar)^n}\int\dif^n y\, 
+			\braket{x-y/2|\rho|x+y/2} \e^{\mi p\cdot y/\hbar}
+	\end{align*}
+	\end{block}
+	\item Marginals: 
+	\begin{align*}
+		&\int\dif^n p\, P(x,p) = \braket{x|\rho|x} \\
+		&\int\dif^n x\, P(x,p) = \braket{p|\rho|p}
+	\end{align*}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[t]\frametitle{Wigner function: properties}
+\begin{itemize}
+	\item Inner product $\rightarrow$ overlap: 
+	$$
+	  \left|\braket{\psi|\varphi}\right|^2 = 2\pi\hbar \int\dif^n x\dif^n p \,
+	  P_\psi(x,p) P_\varphi(x,p)
+	$$
+	\item Operator Wigner transformation and expectation values: 
+	\begin{align*}
+		&g(x,p) \equiv \int\dif^n y \, \braket{x-y/2|G|x+y/2}
+		\e^{\mi p\cdot y/\hbar} \\
+		&\Tr [\rho G] = \int\dif^n x\dif^n p\, P(x,p)g(x,p)
+	\end{align*}
+	\item Cauchy inequality for pure state
+	$$
+	 -\frac 2h \le P(x,p) \le \frac 2h
+	$$
+\end{itemize}
 \end{frame}
 
 
