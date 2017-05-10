@@ -1,6 +1,6 @@
 %!TEX program = xelatex
 %!TEX option = --output-driver="xdvipdfmx -V7"
-\documentclass[xcolor=dvipsnames,hyperref={CJKbookmarks=true}]{beamer}
+\documentclass[xcolor=dvipsnames,hyperref={CJKbookmarks=true},aspectratio=169]{beamer}
 % \usetheme{CambridgeUS}
 % \usecolortheme{dolphin}
 % \usefonttheme{professionalfonts}
@@ -97,7 +97,7 @@
 \end{itemize}
 \begin{figure}
 \centering
-\includegraphics[width=0.8\linewidth]{cQED-atom.pdf}
+\includegraphics[width=0.6\linewidth]{cQED-atom.pdf}
 \end{figure}
 \tiny{\textcolor{gray}{Image from Blais, Alexandre, et al. "Cavity quantum electrodynamics for superconducting electrical circuits: An architecture for quantum computation." Physical Review A 69.6 (2004): 062320.\cite{blais2004cavity}}}
 \end{frame}
@@ -109,7 +109,7 @@
 \end{itemize}
 \begin{figure}
 \centering
-\includegraphics[width=0.8\linewidth]{cavity.png}
+\includegraphics[width=0.6\linewidth]{cavity.png}
 \end{figure}
 \tiny{\textcolor{gray}{Image from Blais, Alexandre, et al. "Cavity quantum electrodynamics for superconducting electrical circuits: An architecture for quantum computation." Physical Review A 69.6 (2004): 062320.\cite{blais2004cavity}}}
 \end{frame}
@@ -136,7 +136,7 @@ $$H =  \omega_r \left(a^{\dagger} a+ \dfrac{1}{2} \right) +  \omega_a \dfrac{\si
 \frametitle{Strong Dispersive Regime}
 \begin{figure}
 \centering
-\includegraphics[width=.9\textwidth]{Regime}
+\includegraphics[width=0.7\textwidth]{Regime}
 \end{figure}
 
 \tiny{\textcolor{gray}{Image from Schuster, D. I., et al. "Resolving photon number states in a superconducting circuit." Nature 445.7127 (2007): 515-518.\cite{schuster2007resolving}}}
@@ -157,10 +157,10 @@ where $\chi = g/\Delta ^2$
 \end{frame}
 
 \subsection{Driving terms}
-\begin{frame}
+\begin{frame}\frametitle{Spectrum of the system}
 \begin{figure}
 \centering
-\includegraphics[width=0.7\linewidth]{TransitionLines}
+\includegraphics[width=0.55\linewidth]{TransitionLines}
 \end{figure}
 \tiny{\textcolor{gray}{Image from Schuster, D. I., et al. "Resolving photon number states in a superconducting circuit." Nature 445.7127 (2007): 515-518.\cite{schuster2007resolving}}}
 \end{frame}
@@ -300,7 +300,7 @@ H =& \omega_r \left(a^{\dagger} a+ \dfrac{1}{2} \right) +  \omega_a \dfrac{\sigm
 \end{column}%
 \begin{column}{0.6\linewidth}
 	\centering
-    \includegraphics[width=\textwidth]{sweaping.png}
+    \includegraphics[width=0.9\textwidth]{sweaping.png}
 \end{column}
 \end{columns}
 \end{frame}
@@ -309,12 +309,12 @@ H =& \omega_r \left(a^{\dagger} a+ \dfrac{1}{2} \right) +  \omega_a \dfrac{\sigm
 \begin{columns}
 \begin{column}{0.35\linewidth}
     \centering
-    \includegraphics[width=\linewidth]{sweaping_origin.pdf}
+    \includegraphics[width=0.7\linewidth]{sweaping_origin.pdf}
     % \caption{Original results (theory: red lines)}
 \end{column}%
 \begin{column}{0.65\linewidth}
 	\centering
-    \includegraphics[width=\linewidth]{sweaping.png}
+    \includegraphics[width=0.7\linewidth]{sweaping.png}
 \end{column}
 \end{columns}
 \begin{itemize}
@@ -326,9 +326,9 @@ H =& \omega_r \left(a^{\dagger} a+ \dfrac{1}{2} \right) +  \omega_a \dfrac{\sigm
 
 \begin{frame}[t]\frametitle{Strengthen? }
 \begin{center}
-	\includegraphics[width=0.7\linewidth]{figure/erf=0.1.png}
+	\includegraphics[width=0.55\linewidth]{figure/erf=0.1.png}
 \end{center}
-For small signal, there's a range where the transmitted amplitude is increased. 
+For small RF signal, there's a range where the transmitted amplitude is increased. 
 We'll explain it later. 
 \end{frame}
 
@@ -339,19 +339,19 @@ We'll explain it later.
 	lock-in at the given frequency. 
 \end{itemize}
 	\centering
-    \includegraphics[width=0.7\textwidth]{thermal.png}
+    \includegraphics[width=0.55\textwidth]{thermal.png}
 \end{frame}
 
 \begin{frame}[t]\frametitle{Thermal Drive: compare}
 \begin{columns}
 \begin{column}{0.4\linewidth}
     \centering
-    \includegraphics[width=\linewidth]{thermal_origin.png}
+    \includegraphics[width=0.8\linewidth]{thermal_origin.png}
     % \caption{Original results (theory: red lines)}
 \end{column}%
 \begin{column}{0.6\linewidth}
 	\centering
-    \includegraphics[width=\linewidth]{thermal.png}
+    \includegraphics[width=0.8\linewidth]{thermal.png}
 \end{column}
 \end{columns}
 \begin{itemize}
@@ -392,13 +392,13 @@ We'll explain it later.
 \begin{columns}
 \begin{column}{0.5\linewidth}
     \centering
-    \only<1>{\includegraphics[width=\linewidth]{erf=0.1,point6942.png}}
-    \only<2>{\includegraphics[width=\linewidth]{erf=20,point6898.8.png}}
+    \only<1>{\includegraphics[width=0.9\linewidth]{erf=0.1,point6942.png}}
+    \only<2>{\includegraphics[width=0.9\linewidth]{erf=20,point6898.8.png}}
 \end{column}%
 \begin{column}{0.5\linewidth}
 	\centering
-    \only<1>{\includegraphics[width=\linewidth]{erf=0.1,point6942,wignar.png}}
-    \only<2>{\includegraphics[width=\linewidth]{erf=20,point6898.8,wignar.png}}
+    \only<1>{\includegraphics[width=0.9\linewidth]{erf=0.1,point6942,wignar.png}}
+    \only<2>{\includegraphics[width=0.9\linewidth]{erf=20,point6898.8,wignar.png}}
 \end{column}
 \end{columns}
 \end{frame}
@@ -424,7 +424,7 @@ Thank you for listening!
 ~\\
 ~\\
 
-\includegraphics[width=\linewidth]{miracle-occurs2.jpg}
+\includegraphics[width=0.9\linewidth]{miracle-occurs2.jpg}
 
 Q \& A
 \end{frame}
@@ -464,7 +464,7 @@ Q \& A
 }
 \only<2>{
 \begin{figure}
-\includegraphics[width=0.8\linewidth]{Circuit}
+\includegraphics[width=0.6\linewidth]{Circuit}
 \caption{Cooper pair box inside a cavity, and spectral features of the
 circuit QED system.}
 \end{figure}
@@ -507,7 +507,7 @@ circuit QED system.}
 In the experiment, the transmitted amplitude at frequency $\omega_{\rf}$ is the 
 main observable. The exact way to measure can be found in Schuster's thesis \cite{schuster2007circuit}: 
 \begin{center}
-  \includegraphics[width=0.7\textwidth]{measurement.png}
+  \includegraphics[width=0.6\textwidth]{measurement.png}
 \end{center}
 	\begin{itemize}
 		\item What we really measure is the expectation of the voltage, or 
@@ -529,7 +529,7 @@ main observable. The exact way to measure can be found in Schuster's thesis \cit
 	\end{block}
 	\item Marginals: 
 	\begin{align*}
-		&\int\dif^n p\, P(x,p) = \braket{x|\rho|x} \\
+		&\int\dif^n p\, P(x,p) = \braket{x|\rho|x} 
 		&\int\dif^n x\, P(x,p) = \braket{p|\rho|p}
 	\end{align*}
 \end{itemize}
