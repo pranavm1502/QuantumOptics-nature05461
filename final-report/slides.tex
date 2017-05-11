@@ -66,6 +66,12 @@
 \end{frame}
 
 \section{Introduction} 
+\AtBeginSection[]
+  {
+     \begin{frame}<beamer>
+     \tableofcontents[currentsection]
+     \end{frame}
+  }
 % \begin{frame}[t]\frametitle{The paper}
     
 % This is for paper \cite{schuster2007resolving} % To show bib
@@ -88,7 +94,7 @@ Qubit's spectral lines different for each photon number state
 
 \section{Experiment implementation}
 
-\subsection{Cavity QED}
+% \subsection{Cavity QED}
 % Say we work with qubits!
 \begin{frame}
 \frametitle{The system: circuit QED + cavity QED}
