@@ -75,45 +75,43 @@
 \begin{frame}
 \frametitle{Outline}
 \begin{itemize}
-\item System sensitive to  number of photons
+\item Resolve photon number states in a circuit QED
 \vspace{0.3cm}
 \item System: superconducting qubit +  microwave transmission line
 \vspace{0.3cm}
 \item Strong dispersive regime
 \vspace{0.3cm}
-\item Spectroscopic measurements: Qubit's spectral lines different for each photon number state
+\item Spectroscopic measurements: \\
+Qubit's spectral lines different for each photon number state
 \end{itemize}
 \end{frame}
 
-% \section{Experiment implementdeation}
+\section{Experiment implementdeation}
 
-\section{The model}
 \subsection{Cavity QED}
 % Say we work with qubits!
 \begin{frame}
-\frametitle{Cavity QED}
-\begin{itemize}
-\item Cavity QED (cQED) $\rightarrow$ interaction electromagnetic field modes with atoms (or qubits)
-\end{itemize}
+\frametitle{The system: circuit QED + cavity QED}
 \begin{figure}
 \centering
-\includegraphics[width=0.8\linewidth]{cQED-atom.pdf}
+\includegraphics[width=0.8\linewidth]{Circuit.png}
 \end{figure}
-\tiny{\textcolor{gray}{Image from Blais, Alexandre, et al. "Cavity quantum electrodynamics for superconducting electrical circuits: An architecture for quantum computation." Physical Review A 69.6 (2004): 062320.\cite{blais2004cavity}}}
+\tiny{\textcolor{gray}{Image from Schuster, D. I., et al. "Resolving photon number states in a superconducting circuit." Nature 445.7127 (2007): 515-518.\cite{schuster2007resolving}}}
 \end{frame}
 
 \begin{frame}
-\frametitle{Cavity QED: Superconducting qubit}
-\begin{itemize}
-\item Cavity QED (cQED) $\rightarrow$ interaction electromagnetic field modes with superconducting qubit
-\end{itemize}
+\frametitle{The system: simplified}
+% \begin{itemize}
+% \item Cavity QED (cQED) $\rightarrow$ interaction electromagnetic field modes with superconducting qubit
+% \end{itemize}
 \begin{figure}
 \centering
-\includegraphics[width=0.8\linewidth]{cavity.png}
+\includegraphics[width=\linewidth]{cavity.png}
 \end{figure}
 \tiny{\textcolor{gray}{Image from Blais, Alexandre, et al. "Cavity quantum electrodynamics for superconducting electrical circuits: An architecture for quantum computation." Physical Review A 69.6 (2004): 062320.\cite{blais2004cavity}}}
 \end{frame}
 
+\section{The model}
 \begin{frame}
 \frametitle{Cavity QED: the Hamiltonian}
 \begin{block}{Hamiltonian}
@@ -405,9 +403,17 @@ We'll explain it later.
 
 \section{Conclusion}
 \begin{frame}[t]\frametitle{Conclusion}
-    
-TBD
-
+\begin{itemize}
+	\item Existence of photons in the cavity shifts the qubit frequency, 
+	which can be read out by applying the sweeping signal to see the qubit 
+	spectrum
+	\item The way the qubit state affects the cavity state is trick: more 
+	like polarization of qubit affect the wave function\pause
+	\vspace{10pt}
+	\item ``Approximately'' the peak hight can be interpreted as the photon 
+	number distribution: ``Resolving'' photon number
+	\item Potential application of quantum nondemolition measurement (QND)
+\end{itemize}
 \end{frame}
 
 \begin{frame}%[allowframebreaks]
@@ -432,46 +438,46 @@ Q \& A
 \appendix
 % \section*{Circuit cQED}
 
-\begin{frame}
-\frametitle{Circuit Cavity QED}
+% \begin{frame}
+% \frametitle{Circuit Cavity QED}
 
-\only<1>{
-\begin{columns}
-\column{0.5\linewidth}
-\centering
-\begin{beamercolorbox}[wd={3cm}, ht={0.3cm},center, rounded=true,shadow=false]{postit}
-\textcolor{White}{Cavity}
-\end{beamercolorbox}
-\vspace{0.5cm}
-\begin{itemize}
-\item 1D transmission line resonator 
-\vspace{0.3cm}
-\item Full-wave section of superconducting coplanar waveguides
-\end{itemize}
-\vspace{0.3cm}
-\column{0.5\linewidth}
-\centering
-\begin{beamercolorbox}[wd={3cm}, ht={0.3cm},center, rounded=true,shadow=false]{postit}
-\textcolor{White}{Qubit}
-\end{beamercolorbox}
-\vspace{0.5cm}
-\begin{itemize}
-\item Cooper pair box
-\vspace{0.3cm}
-\item Superconducting mesoscopic island connected via a Josephson Junction to a reservoir
-\end{itemize}
-\end{columns}
-}
-\only<2>{
-\begin{figure}
-\includegraphics[width=0.8\linewidth]{Circuit}
-\caption{Cooper pair box inside a cavity, and spectral features of the
-circuit QED system.}
-\end{figure}
-\begin{center}
-\tiny{\textcolor{gray}{Image from Schuster, D. I., et al. "Resolving photon number states in a superconducting circuit." Nature 445.7127 (2007): 515-518.}}
-\end{center}}
-\end{frame}
+% \only<1>{
+% \begin{columns}
+% \column{0.5\linewidth}
+% \centering
+% \begin{beamercolorbox}[wd={3cm}, ht={0.3cm},center, rounded=true,shadow=false]{postit}
+% \textcolor{White}{Cavity}
+% \end{beamercolorbox}
+% \vspace{0.5cm}
+% \begin{itemize}
+% \item 1D transmission line resonator 
+% \vspace{0.3cm}
+% \item Full-wave section of superconducting coplanar waveguides
+% \end{itemize}
+% \vspace{0.3cm}
+% \column{0.5\linewidth}
+% \centering
+% \begin{beamercolorbox}[wd={3cm}, ht={0.3cm},center, rounded=true,shadow=false]{postit}
+% \textcolor{White}{Qubit}
+% \end{beamercolorbox}
+% \vspace{0.5cm}
+% \begin{itemize}
+% \item Cooper pair box
+% \vspace{0.3cm}
+% \item Superconducting mesoscopic island connected via a Josephson Junction to a reservoir
+% \end{itemize}
+% \end{columns}
+% }
+% \only<2>{
+% \begin{figure}
+% \includegraphics[width=0.8\linewidth]{Circuit}
+% \caption{Cooper pair box inside a cavity, and spectral features of the
+% circuit QED system.}
+% \end{figure}
+% \begin{center}
+% \tiny{\textcolor{gray}{Image from Schuster, D. I., et al. "Resolving photon number states in a superconducting circuit." Nature 445.7127 (2007): 515-518.}}
+% \end{center}}
+% \end{frame}
 
 \begin{frame}[t]\frametitle{Josephson junction and superconducting circuit}
 % \begin{itemize}
@@ -501,6 +507,13 @@ circuit QED system.}
 	\item Choose eigen basis at degeneracy point ($N_g = 1/2$), we can have JC 
 	model up to some constants. 
 \end{itemize}
+\end{frame}
+
+\begin{frame}[t]\frametitle{Energy levels}
+\begin{center}
+	\includegraphics[width=0.5\linewidth]{energy_levels.pdf}
+\end{center}
+\tiny{\textcolor{gray}{Image from Schuster, D. I., et al. "Resolving photon number states in a superconducting circuit." Nature 445.7127 (2007): 515-518.\cite{schuster2007resolving}}}
 \end{frame}
 
 \begin{frame}[t]\frametitle{Measurement}
